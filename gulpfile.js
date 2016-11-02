@@ -17,6 +17,9 @@ var scripts 	= [
     styles 	= [
         'src/scss/styles.scss'
     ],
+    watchStyles 	= [
+        'src/scss/*.scss'
+    ],
     wantToMove = [
         {
             from: 'src/fonts/**/*',
@@ -94,7 +97,7 @@ gulp.task('scripts', function(){
  * Run gulp watcher, for listen to changes of watch files
  */
 gulp.task('watch', function(){
-    gulp.watch(styles, ['styles']);
+    gulp.watch(watchStyles, ['styles']);
     gulp.watch(watchScripts, ['scripts']);
 });
 
