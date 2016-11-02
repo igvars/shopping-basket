@@ -1,0 +1,33 @@
+{
+  "name": "shopping-basket",
+  "version": "1.0.0",
+  "description": "Frontend test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sergeyusatyuk/shopping-basket.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sergeyusatyuk/shopping-basket/issues"
+  },
+  "homepage": "https://github.com/sergeyusatyuk/shopping-basket#readme",
+  "devDependencies": {
+    "bootstrap-sass": "^3.3.7",
+    "bootstrap-select": "^1.11.2",
+    "font-awesome": "^4.7.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^2.2.0",
+    "gulp-uglify": "^2.0.0",
+    "jquery": "^3.1.1",
+    "slick-carousel": "^1.6.0"
+  }
+}
