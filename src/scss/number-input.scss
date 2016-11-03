@@ -1,0 +1,54 @@
+@import "variables";
+
+@mixin number-input() {
+  position: absolute;
+  right: 0;
+  border-left: 1px solid #cccccc;
+  cursor: pointer;
+  color: #fff;
+  text-align: center;
+  padding: 0 5px;
+  font-size: $default-font-size;
+  height: 10px;
+
+  & > i {
+    position: relative;
+    top: -2px;
+  }
+  &:active {
+    background: #06ee00;
+  }
+}
+
+.number-input-group {
+  float: left;
+  position: relative;
+  width: 42px;
+  border: 1px solid #cccccc;
+  height: 22px;
+  margin: 5px 0;
+
+  .number-input {
+    width: 100%;
+    padding-right: 5px;
+    text-align: center;
+    font-size: $default-font-size;
+    height: 20px;
+  }
+  .arrow-up {
+    @include number-input();
+    top: 0;
+    background: linear-gradient(to bottom,
+            rgba(6, 238, 0, 1) 0%,
+            rgba(5, 155, 1, 1) 100%
+    );
+  }
+  .arrow-down {
+    @include number-input();
+    bottom: 0;
+    background: linear-gradient(to top,
+            rgba(6, 238, 0, 1) 0%,
+            rgba(5, 155, 1, 1) 100%
+    );
+  }
+}

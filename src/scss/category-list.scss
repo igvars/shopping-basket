@@ -1,0 +1,19 @@
+@import "variables";
+
+.list-label {
+  font-size: $default-font-size;
+}
+.category-list {
+  font-size: $default-font-size;
+  display: inline-block;
+
+  & > li {
+    display: inline-block;
+    vertical-align: top;
+    padding: 0 5px;
+
+    & > a {
+      color: $list-green;
+    }
+  }
+}

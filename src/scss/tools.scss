@@ -1,0 +1,21 @@
+body {
+  font-size: 0;
+}
+.image-wrapper {
+  width: 100%;
+  min-width: 100%;
+  position: relative;
+  overflow: hidden; }
+
+.image-wrapper > img {
+  left: 50%;
+  max-width: none;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  min-height: 100%;
+  width: 100%;
+}
+.clear {
+  clear: both;
+}
