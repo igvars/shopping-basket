@@ -115,25 +115,20 @@ var Basket = (function(){
             $(containerElement).append( template(data) );
         },
         commit: function () {
-
             this.countTotalCount();
             this.countTotalPrice();
             setCookie("shoppingBasket",JSON.stringify(items.items));
         },
         event: function(){
             $(document).on("click", ".basket .arrow-down", function () {
-                var item = $(this).closest("li");
-                var id = item.data('item-id');
-                var count = item.find(".number-input").val()*1-1;
+                var id = $(this).closest("li").data('item-id');
                 Basket.changeItemCount(id,"remove");
-                $(window).trigger('removeItem', {post_id: id, count: count});
+                $(window).trigger('removeItem', {post_id: id, count: 1});
             });
             $(document).on("click", ".basket .arrow-up", function () {
-                var item = $(this).closest("li");
-                var id = item.data('item-id');
-                var count = item.find(".number-input").val()*1+1;
+                var id = $(this).closest("li").data('item-id');
                 Basket.changeItemCount(id,"add");
-                $(window).trigger('addItem', {post_id: id, count: count});
+                $(window).trigger('addItem', {post_id: id, count: 1});
             });
         }
     }

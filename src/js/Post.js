@@ -1,5 +1,4 @@
 var Post = (function(){
-    var self = this;
     var containerElement = ".posts";
     var templateElement = "#post-template";
 
@@ -20,8 +19,10 @@ var Post = (function(){
                 Post.getData(category_id, order);
             });
             $(window).on('addItem', function(e, data){
+                Post.reduceMaxQuantity(data.post_id, data.count)
             });
             $(window).on('removeItem', function(e, data){
+                Post.increaseMaxQuantity(data.post_id, data.count)
             });
         },
         getData: function(category_id, order){
@@ -128,6 +129,33 @@ var Post = (function(){
 
             this.event();
         },
+        increaseMaxQuantity: function (post_id, count) {
+            var i = this.checkList(post_id);
+            if(i) {
+                var post = products.products[i];
+                post.quantity += count;
+                this.render(products);
+            }
+        },
+        reduceMaxQuantity: function (post_id, count) {
+            var i = this.checkList(post_id);
+            if(i) {
+                var post = products.products[i];
+                post.quantity -= count;
+                if(post.quantity < 0) {
+                    post.quantity = 0;
+                }
+                this.render(products);
+            }
+        },
+        checkList: function (post_id) {
+            for(var i in products.products) {
+                if(products.products[i].id == post_id) {
+                    return i;
+                }
+            }
+            return false;
+        },
         event: function(){
 
             $(document).on("click", ".post", function () {
@@ -139,24 +167,14 @@ var Post = (function(){
                     $(this).removeClass("active");
                 });
                 self.addClass("active");
-
-                var id = $(this).data('post-id');
-
-                $(window).trigger('clickPost', {id: id});
             });
             $(document).on("click", ".post .button-buy-group", function () {
-                var post = $(this).closest(".post");
-                var id = post.data('post-id');
-                var count = post.find(".number-input").val();
-                post.find(".number-input")[0].max -= post.find(".number-input").val();
-                var maxCount = post.find(".number-input")[0].max;
-                if(maxCount <= 0) {
-                    post.find(".number-input")[0].max = 0;
-                    post.find(".number-input")[0].disabled = true;
-                    post.find(".bottom-block").addClass("unavailable");
-                    post.find(".number-input").val(0);
+                var id = $(this).closest(".post").data('post-id');
+                var count = $(this).closest(".post").find(".number-input").val();
+                if(count > 0) {
+                    Post.reduceMaxQuantity(id, count);
+                    $(window).trigger('addToBasket', {post_id: id, count: count});
                 }
-                $(window).trigger('addToBasket', {post_id: id,count: count});
             });
             $(document).on("click", ".post .arrow-up", function () {
                 var input = $(this).closest(".number-input-group").find(".number-input");
