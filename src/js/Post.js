@@ -44,13 +44,17 @@ var Post = (function(){
             });
 
             for (var i in products.products) {
-                if(category_id && products.products[i].category_id != category_id) {
-                    delete products.products[i];
-                    continue;
-                }
-                for (var j in galleries.galleries) {
-                    if (products.products[i].gallery_id == galleries.galleries[j].id) {
-                        products.products[i].images = galleries.galleries[j].images;
+                if(products.products.hasOwnProperty(i)) {
+                    if (category_id && products.products[i].category_id != category_id) {
+                        delete products.products[i];
+                        continue;
+                    }
+                    for (var j in galleries.galleries) {
+                        if(galleries.galleries.hasOwnProperty(j)) {
+                            if (products.products[i].gallery_id == galleries.galleries[j].id) {
+                                products.products[i].images = galleries.galleries[j].images;
+                            }
+                        }
                     }
                 }
             }
@@ -81,9 +85,11 @@ var Post = (function(){
             });
             var post = false;
             for(var i in posts.products) {
-                if(posts.products[i].id == post_id) {
-                    post = posts.products[i];
-                    break;
+                if(posts.products.hasOwnProperty(i)) {
+                    if (posts.products[i].id == post_id) {
+                        post = posts.products[i];
+                        break;
+                    }
                 }
             }
             return post;
@@ -150,8 +156,10 @@ var Post = (function(){
         },
         checkList: function (post_id) {
             for(var i in products.products) {
-                if(products.products[i].id == post_id) {
-                    return i;
+                if(products.products.hasOwnProperty(i)) {
+                    if (products.products[i].id == post_id) {
+                        return i;
+                    }
                 }
             }
             return false;

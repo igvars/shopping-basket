@@ -67,8 +67,10 @@ var Basket = (function(){
         countTotalPrice: function () {
             var sum = new Decimal(0);
             for(var i in items.items) {
-                var price = new Decimal(items.items[i].itemPrice);
-                sum = sum.plus(price);
+                if(items.items.hasOwnProperty(i)) {
+                    var price = new Decimal(items.items[i].itemPrice);
+                    sum = sum.plus(price);
+                }
             }
             items.totalPrice = sum;
         },
@@ -93,8 +95,10 @@ var Basket = (function(){
         },
         checkList: function (post_id) {
             for(var i in items.items) {
-                if(items.items[i].id == post_id) {
-                    return i;
+                if(items.items.hasOwnProperty(i)) {
+                    if (items.items[i].id == post_id) {
+                        return i;
+                    }
                 }
             }
             return false;
@@ -104,8 +108,10 @@ var Basket = (function(){
             if(rawItems) {
                 rawItems = JSON.parse(getCookie("shoppingBasket"));
                 for (var i in rawItems) {
-                    this.add(rawItems[i].id, rawItems[i].count);
-                    $(window).trigger('addItem', {post_id: rawItems[i].id, count: rawItems[i].count});
+                    if(rawItems.hasOwnProperty(i)) {
+                        this.add(rawItems[i].id, rawItems[i].count);
+                        $(window).trigger('addItem', {post_id: rawItems[i].id, count: rawItems[i].count});
+                    }
                 }
             }
         },
