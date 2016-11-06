@@ -6,6 +6,7 @@ var Post = (function(){
     var galleries = "";
     var category_id = "";
     var order = "";
+    var regexp = /^[0-9]+$/;
     return {
         init: function(){
             Post.getData();
@@ -186,7 +187,8 @@ var Post = (function(){
             $(document).on("click", ".post .button-buy-group", function () {
                 var id = $(this).closest(".post").data('post-id');
                 var count = $(this).closest(".post").find(".number-input").val();
-                if(count > 0) {
+                var flag = count.search(regexp);
+                if(flag != -1 && count > 0) {
                     Post.reduceMaxQuantity(id, count);
                     $(window).trigger('addToBasket', {post_id: id, count: count});
                 }
@@ -207,6 +209,18 @@ var Post = (function(){
                 inputValue = parseInt(inputValue);
                 if(inputValue > 0) {
                     input.val(--inputValue);
+                }
+            });
+            $(document).on("keydown", ".post .number-input", function (e) {
+                if((e.which >=48 && e.which <=57)  // digits
+                    || (e.which >=96 && e.which <=105)  // num lock
+                    || e.which==8 // backspace
+                    || (e.which >=37 && e.which <=40) // arrows
+                    || e.which==46) // delete
+                {
+                    return true;
+                } else {
+                    return false;
                 }
             });
         }
