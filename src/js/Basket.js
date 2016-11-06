@@ -57,7 +57,7 @@ var Basket = (function(){
             }
         },
         remove: function (index) {
-            delete items.items[index];
+            delete items.items.splice(index, 1);
 
             this.countTotalCount();
             this.countTotalPrice();
@@ -107,9 +107,12 @@ var Basket = (function(){
             return false;
         },
         getData: function(){
-            var rawItems = JSON.parse(getCookie("shoppingBasket"));
-            for(var i in rawItems.items) {
-                this.add(rawItems.items[i].id,rawItems.items[i].count);
+            var rawItems = getCookie("shoppingBasket");
+            if(rawItems) {
+                rawItems = JSON.parse(getCookie("shoppingBasket"))
+                for (var i in rawItems.items) {
+                    this.add(rawItems.items[i].id, rawItems.items[i].count);
+                }
             }
         },
         render: function(data){
