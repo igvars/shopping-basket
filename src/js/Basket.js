@@ -56,7 +56,7 @@ var Basket = (function(){
             }
         },
         remove: function (index) {
-            delete items.items.splice(index, 1);
+            items.items.splice(index, 1);
 
             this.countTotalCount();
             this.countTotalPrice();
