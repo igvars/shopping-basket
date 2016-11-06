@@ -129,9 +129,9 @@ var Basket = (function(){
                 $(window).trigger('removeItem', {post_id: id, count: count});
             });
             $(document).on("click", ".basket .arrow-up", function () {
-                var post = $(this).closest("li");
-                var id = post.data('item-id');
-                var count = post.find(".number-input").val()*1+1;
+                var item = $(this).closest("li");
+                var id = item.data('item-id');
+                var count = item.find(".number-input").val()*1+1;
                 Basket.changeItemCount(id,"add");
                 $(window).trigger('addItem', {post_id: id, count: count});
             });
