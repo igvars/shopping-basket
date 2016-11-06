@@ -7,8 +7,15 @@ var scripts 	= [
         'node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js',
         'node_modules/slick-carousel/slick/slick.min.js',
         'node_modules/bootstrap-select/dist/js/bootstrap-select.min.js',
+        'node_modules/handlebars/dist/handlebars.min.js',
+        'node_modules/decimal.js/decimal.min.js',
 
         // Another scripts here
+        'src/js/Order.js',
+        'src/js/Category.js',
+        'src/js/Post.js',
+        'src/js/Basket.js',
+        'src/js/App.js',
         'src/js/*.js'
     ],
     watchScripts	=[

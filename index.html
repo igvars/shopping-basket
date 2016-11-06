@@ -6,16 +6,18 @@
     <link rel="stylesheet" href="dist/css/styles.min.css">
 </head>
 <body>
-    <section class="container-fluid">
+    <section class="container">
         <div class="row">
-            <article class="col-md-9">
+            <article class="col-md-9 col-sm-8">
                 <div class="row">
                     <div class="col-md-12">
                         <span class="list-label">Please choose category:</span>
                         <ul class="category-list">
-                            <li><a href="#">Category #1</a></li>
-                            <li><a href="#">Category #2</a></li>
-                            <li><a href="#">Category #3</a></li>
+                            <script id="category-list-template" type="text/x-handlebars-template">
+                                {{#each categories}}
+                                    <li><a href="#" data-category-id="{{id}}">{{title}}</a></li>
+                                {{/each}}
+                            </script>
                         </ul>
                     </div>
                     <div class="col-md-12">
@@ -27,111 +29,93 @@
                         </select>
                     </div>
                 </div>
-                    <div class="col-md-4">
-                        <div class="post">
-
-                            <div class="slider-for">
-                                <div>
-                                    <div class="image-wrapper">
-                                        <img src="images/03c963488980434cbc1f9d9563b36564/2015-new-men-s-business-long-sleeved-dress-shirt-color-twill-jacquard-occupation-square-white-shirt (1).jpg"
-                                             alt="">
-                                    </div>
+                <div class="posts">
+                    <script id="post-template" type="text/x-handlebars-template">
+                        {{#each products}}
+                        <div class="col-md-4 col-sm-6">
+                            <div class="post" data-post-id="{{this.id}}">
+                                <div class="slider-for">
+                                    {{#each images}}
+                                        <div>
+                                            <div class="image-wrapper">
+                                                <img src="images/{{../gallery_id}}/{{this}}"
+                                                     alt="">
+                                            </div>
+                                        </div>
+                                    {{/each}}
                                 </div>
-                                <div>
-                                    <div class="image-wrapper">
-                                        <img src="images/03c963488980434cbc1f9d9563b36564/2015-new-men-s-business-long-sleeved-dress-shirt-color-twill-jacquard-occupation-square-white-shirt.jpg_350x350.jpg"
-                                             alt="">
-                                    </div>
+                                <div class="slider-nav">
+                                    {{#each images}}
+                                        <div>
+                                            <div class="image-wrapper">
+                                                <img src="images/{{../gallery_id}}/{{this}}"
+                                                     alt="">
+                                            </div>
+                                        </div>
+                                    {{/each}}
                                 </div>
-                                <div>
-                                    <div class="image-wrapper">
-                                        <img src="images/03c963488980434cbc1f9d9563b36564/2015-new-men-s-business-long-sleeved-dress-shirt-color-twill-jacquard-occupation-square-white-shirt (1).jpg"
-                                             alt="">
+                                <div class="content">
+                                    <div class="name">{{title}}</div>
+                                    <div class="description">{{description}}</div>
+                                    <div class="bottom-block {{#unless quantity}}unavailable{{/unless}}">
+                                        <div class="number-input-group">
+                                            {{#if quantity}}
+                                                <input class="number-input" type="number" value="1" max="{{quantity}}" min="0">
+                                            {{else}}
+                                                <input class="number-input" type="number" value="{{quantity}}" max="{{quantity}}" min="0" disabled>
+                                            {{/if}}
+                                            <div class="arrow-up"><i class="fa fa-caret-up"></i></div>
+                                            <div class="arrow-down"><i class="fa fa-caret-down"></i></div>
+                                        </div>
+                                        <div class="button-buy-group">
+                                            <button class="price-button"><span class="currency">$</span> <span class="price">{{price}}</span></button>
+                                            <button class="basket-button"><img src="src/images/shopping-busket.png" alt=""></button>
+                                        </div>
+                                        <div class="clear"></div>
                                     </div>
-                                </div>
-                                <div>
-                                    <div class="image-wrapper">
-                                        <img src="images/03c963488980434cbc1f9d9563b36564/2015-new-men-s-business-long-sleeved-dress-shirt-color-twill-jacquard-occupation-square-white-shirt (1).jpg"
-                                             alt="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="slider-nav">
-                                <div>
-                                    <div class="image-wrapper">
-                                        <img src="images/03c963488980434cbc1f9d9563b36564/2015-new-men-s-business-long-sleeved-dress-shirt-color-twill-jacquard-occupation-square-white-shirt (1).jpg"
-                                             alt="">
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="image-wrapper">
-                                        <img src="images/03c963488980434cbc1f9d9563b36564/2015-new-men-s-business-long-sleeved-dress-shirt-color-twill-jacquard-occupation-square-white-shirt.jpg_350x350.jpg"
-                                             alt="">
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="image-wrapper">
-                                        <img src="images/03c963488980434cbc1f9d9563b36564/2015-new-men-s-business-long-sleeved-dress-shirt-color-twill-jacquard-occupation-square-white-shirt (1).jpg"
-                                             alt="">
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="image-wrapper">
-                                        <img src="images/03c963488980434cbc1f9d9563b36564/2015-new-men-s-business-long-sleeved-dress-shirt-color-twill-jacquard-occupation-square-white-shirt (1).jpg"
-                                             alt="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <div class="name">Xiaomi band 3</div>
-                                <div class="description">Lorem Ipsum has been the industry's standard dummy text. Lorem Ipsum has been the industry's standard dummy text  </div>
-                                <div class="bottom-block">
-                                    <div class="number-input-group">
-                                        <input class="number-input" type="number" value="1" placeholder="1" max="5" min="0">
-                                        <div class="arrow-up"><i class="fa fa-caret-up"></i></div>
-                                        <div class="arrow-down"><i class="fa fa-caret-down"></i></div>
-                                    </div>
-                                    <div class="button-buy-group">
-                                        <button class="price-button"><span class="currency">$</span> <span class="price">111</span></button>
-                                        <button class="basket-button"><img src="src/images/shopping-busket.png" alt=""></button>
-                                    </div>
-                                    <div class="clear"></div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        {{/each}}
+                    </script>
+                </div>
+
 
 
             </article>
-            <aside class="col-md-3">
-                <!--<div class="basket">-->
-                <div class="basket empty-basket">
-                    <div class="top-block">
-                        <div class="name">Shopping basket</div>
-                        <div class="cart">
-                            <div class="items-count">1</div>
-                            <img src="src/images/shopping-cart-64.png" alt="">
+            <aside class="basket-container col-md-3 col-sm-4">
+                <script id="basket-items-template" type="text/x-handlebars-template">
+                    <div class="basket {{#unless items}}empty-basket{{/unless}}">
+
+                        <div class="top-block">
+                            <div class="name">Shopping basket</div>
+                            <div class="cart">
+                                <div class="items-count">{{totalCount}}</div>
+                                <img src="src/images/shopping-cart-64.png" alt="">
+                            </div>
                         </div>
+                        <ul class="items">
+                                {{#each items}}
+                                <li data-item-id="{{id}}">
+                                    <div class="item-name">{{title}}</div>
+                                    <div class="number-input-group">
+                                        <input class="number-input" type="number" value="{{count}}" max="{{quantity}}" min="0" readonly>
+                                        <div class="arrow-up"><i class="fa fa-caret-up"></i></div>
+                                        <div class="arrow-down"><i class="fa fa-caret-down"></i></div>
+                                    </div>
+                                    <div class="price-block">
+                                        <span class="currency">$</span> <span class="price">{{itemPrice}}</span>
+                                    </div>
+                                    <div class="clear"></div>
+                                </li>
+                                {{/each}}
+                        </ul>
+                        <div class="total-price">
+                            <span class="currency">$</span> <span class="price">{{totalPrice}}</span>
+                        </div>
+                        <div class="clear"></div>
                     </div>
-                    <ul class="items">
-                        <li>
-                            <div class="item-name">Xiaomi band</div>
-                            <div class="number-input-group">
-                                <input class="number-input" type="number" value="1" placeholder="1" max="5" min="0">
-                                <div class="arrow-up"><i class="fa fa-caret-up"></i></div>
-                                <div class="arrow-down"><i class="fa fa-caret-down"></i></div>
-                            </div>
-                            <div class="price-block">
-                                <span class="currency">$</span> <span class="price">111</span>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                    </ul>
-                    <div class="total-price">
-                        <span class="currency">$</span> <span class="price">111</span>
-                    </div>
-                    <div class="clear"></div>
-                </div>
+                </script>
             </aside>
         </div>
     </section>
