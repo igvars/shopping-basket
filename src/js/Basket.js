@@ -4,20 +4,29 @@ var Basket = (function(){
     var templateElement = "#basket-items-template";
 
     var items = {items:[],totalPrice:0,totalCount:0};
-
+    function setCookie(name, value) {
+        document.cookie = name + "=" + value;
+    }
+    function getCookie(name) {
+        var r = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
+        if (r) return r[2];
+        else return "";
+    }
     return {
         init: function(){
+            this.getData();
             this.render(items);
-
             this.event();
             $(window).on('addToBasket', function(e, data){
                 var post_id = data.post_id;
                 var count = data.count;
                 Basket.add(post_id, count);
+                Basket.render(items);
             });
         },
         add: function (post_id, count) {
             var post  = Post.getPostForBasket(post_id);
+            console.log(post);
             if(post) {
                 var i = this.checkList(post.id);
                 if (i) {
@@ -41,15 +50,19 @@ var Basket = (function(){
                     items.items[last_index].count = count;
                     items.items[last_index].itemPrice = this.countPrice(post.price, count);
                 }
+
                 this.countTotalCount();
                 this.countTotalPrice();
-                this.render(items);
+                setCookie("shoppingBasket",JSON.stringify(items));
             }
         },
         remove: function (index) {
             delete items.items[index];
+
             this.countTotalCount();
             this.countTotalPrice();
+
+            setCookie("shoppingBasket",JSON.stringify(items));
         },
         countPrice: function (itemPrice, itemCount) {
             var price = new Decimal(itemPrice);
@@ -82,8 +95,6 @@ var Basket = (function(){
             }
             if(action == "add") {
                 this.add(post.id,1);
-                // items.items[index].count = items.items[index].count*1+1;
-                // items.items[index].itemPrice = Basket.countPrice(post.price, items.items[index].count);
             }
             this.render(items);
         },
@@ -96,6 +107,10 @@ var Basket = (function(){
             return false;
         },
         getData: function(){
+            var rawItems = JSON.parse(getCookie("shoppingBasket"));
+            for(var i in rawItems.items) {
+                this.add(rawItems.items[i].id,rawItems.items[i].count);
+            }
         },
         render: function(data){
             var template = Handlebars.compile( $(templateElement).html() );
