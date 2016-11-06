@@ -50,18 +50,13 @@ var Basket = (function(){
                     items.items[last_index].itemPrice = this.countPrice(post.price, count);
                 }
 
-                this.countTotalCount();
-                this.countTotalPrice();
-                setCookie("shoppingBasket",JSON.stringify(items.items));
+                this.commit();
             }
         },
         remove: function (index) {
             items.items.splice(index, 1);
 
-            this.countTotalCount();
-            this.countTotalPrice();
-
-            setCookie("shoppingBasket",JSON.stringify(items.items));
+            this.commit();
         },
         countPrice: function (itemPrice, itemCount) {
             var price = new Decimal(itemPrice);
@@ -89,8 +84,7 @@ var Basket = (function(){
                 if(items.items[index].count == 0) {
                     this.remove(index);
                 }
-                this.countTotalCount();
-                this.countTotalPrice();
+                this.commit();
             }
             if(action == "add") {
                 this.add(post.id,1);
@@ -119,6 +113,12 @@ var Basket = (function(){
             var template = Handlebars.compile( $(templateElement).html() );
             $(containerElement + " div").remove();
             $(containerElement).append( template(data) );
+        },
+        commit: function () {
+
+            this.countTotalCount();
+            this.countTotalPrice();
+            setCookie("shoppingBasket",JSON.stringify(items.items));
         },
         event: function(){
             $(document).on("click", ".basket .arrow-down", function () {
