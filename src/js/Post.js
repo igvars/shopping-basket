@@ -19,6 +19,10 @@ var Post = (function(){
                 order = data.order;
                 Post.getData(category_id, order);
             });
+            $(window).on('addItem', function(e, data){
+            });
+            $(window).on('removeItem', function(e, data){
+            });
         },
         getData: function(category_id, order){
             $.ajax({

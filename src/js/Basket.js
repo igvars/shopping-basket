@@ -52,7 +52,7 @@ var Basket = (function(){
 
                 this.countTotalCount();
                 this.countTotalPrice();
-                setCookie("shoppingBasket",JSON.stringify(items));
+                setCookie("shoppingBasket",JSON.stringify(items.items));
             }
         },
         remove: function (index) {
@@ -61,7 +61,7 @@ var Basket = (function(){
             this.countTotalCount();
             this.countTotalPrice();
 
-            setCookie("shoppingBasket",JSON.stringify(items));
+            setCookie("shoppingBasket",JSON.stringify(items.items));
         },
         countPrice: function (itemPrice, itemCount) {
             var price = new Decimal(itemPrice);
@@ -109,8 +109,9 @@ var Basket = (function(){
             var rawItems = getCookie("shoppingBasket");
             if(rawItems) {
                 rawItems = JSON.parse(getCookie("shoppingBasket"));
-                for (var i in rawItems.items) {
-                    this.add(rawItems.items[i].id, rawItems.items[i].count);
+                for (var i in rawItems) {
+                    this.add(rawItems[i].id, rawItems[i].count);
+                    $(window).trigger('addItem', {post_id: rawItems[i].id, count: rawItems[i].count});
                 }
             }
         },
