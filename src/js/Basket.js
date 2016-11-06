@@ -108,7 +108,7 @@ var Basket = (function(){
         getData: function(){
             var rawItems = getCookie("shoppingBasket");
             if(rawItems) {
-                rawItems = JSON.parse(getCookie("shoppingBasket"))
+                rawItems = JSON.parse(getCookie("shoppingBasket"));
                 for (var i in rawItems.items) {
                     this.add(rawItems.items[i].id, rawItems.items[i].count);
                 }
