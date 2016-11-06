@@ -125,6 +125,19 @@ var Basket = (function(){
             this.countTotalPrice();
             setCookie("shoppingBasket",JSON.stringify(items.items));
         },
+        fetchBasketData: function () {
+            var result = [];
+            console.log(items);
+            for(var i in items.items) {
+                if(items.items.hasOwnProperty(i)) {
+                    result[i] = {
+                        id:items.items[i].id,
+                        count:items.items[i].count
+                    }
+                }
+            }
+            return result;
+        },
         event: function(){
             $(document).on("click", ".basket .arrow-down", function () {
                 var id = $(this).closest("li").data('item-id');

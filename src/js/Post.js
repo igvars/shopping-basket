@@ -9,7 +9,6 @@ var Post = (function(){
     return {
         init: function(){
             Post.getData();
-
             $(window).on('clickCategory', function(e, data){
                 category_id = data.id;
                 Post.getData(category_id, order);
@@ -71,6 +70,13 @@ var Post = (function(){
                     }
                 );
             }
+            var basketData = Basket.fetchBasketData();
+            for(var i in basketData) {
+                if(basketData.hasOwnProperty(i)) {
+                    this.reduceMaxQuantity(basketData[i].id, basketData[i].count);
+                }
+            }
+
             this.render(products);
         },
         getPostForBasket: function (post_id) {
@@ -176,6 +182,7 @@ var Post = (function(){
                 });
                 self.addClass("active");
             });
+            
             $(document).on("click", ".post .button-buy-group", function () {
                 var id = $(this).closest(".post").data('post-id');
                 var count = $(this).closest(".post").find(".number-input").val();
