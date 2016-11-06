@@ -195,15 +195,18 @@ var Post = (function(){
                 var input = $(this).closest(".number-input-group").find(".number-input");
                 var maxValue = input[0].max;
                 var inputValue = input.val();
+                maxValue = parseInt(maxValue);
+                inputValue = parseInt(inputValue);
                 if (inputValue < maxValue) {
-                    $(this).closest(".number-input-group").find(".number-input").val(inputValue * 1 + 1);
+                    input.val(++inputValue);
                 }
             });
             $(document).on("click", ".post .arrow-down", function () {
                 var input = $(this).closest(".number-input-group").find(".number-input");
                 var inputValue = input.val();
+                inputValue = parseInt(inputValue);
                 if(inputValue > 0) {
-                    $(this).closest(".number-input-group").find(".number-input").val(inputValue * 1 - 1);
+                    input.val(--inputValue);
                 }
             });
         }

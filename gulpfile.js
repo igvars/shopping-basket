@@ -15,8 +15,7 @@ var scripts 	= [
         'src/js/Category.js',
         'src/js/Post.js',
         'src/js/Basket.js',
-        'src/js/App.js',
-        'src/js/*.js'
+        'src/js/App.js'
     ],
     watchScripts	=[
         'src/js/*.js'
