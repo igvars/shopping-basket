@@ -26,7 +26,6 @@ var Basket = (function(){
         },
         add: function (post_id, count) {
             var post  = Post.getPostForBasket(post_id);
-            console.log(post);
             if(post) {
                 var i = this.checkList(post.id);
                 if (i) {
