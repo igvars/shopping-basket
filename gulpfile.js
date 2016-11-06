@@ -67,7 +67,7 @@ gulp.task('move', function(){
         return true;
 
     for(var i in wantToMove){
-        if(wantToMove.hasOwnProperty(wantToMove[i])) {
+        if(wantToMove.hasOwnProperty(i)) {
             gulp.src(wantToMove[i].from)
                 .pipe(plumber({errorHandler: errorHandler}))
                 .pipe(gulp.dest(wantToMove[i].to));
