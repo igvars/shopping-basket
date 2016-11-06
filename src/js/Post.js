@@ -23,6 +23,7 @@ var Post = (function(){
             $(window).on('removeItem', function(e, data){
                 Post.increaseMaxQuantity(data.post_id, data.count)
             });
+            this.event();
         },
         getData: function(category_id, order){
             $.ajax({
@@ -139,7 +140,6 @@ var Post = (function(){
 
             });
 
-            this.event();
         },
         increaseMaxQuantity: function (post_id, count) {
             var i = this.checkList(post_id);

@@ -127,7 +127,6 @@ var Basket = (function(){
         },
         fetchBasketData: function () {
             var result = [];
-            console.log(items);
             for(var i in items.items) {
                 if(items.items.hasOwnProperty(i)) {
                     result[i] = {
