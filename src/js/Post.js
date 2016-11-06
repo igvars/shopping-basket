@@ -173,10 +173,11 @@ var Post = (function(){
         },
         event: function(){
 
-            $(document).on("click", ".post", function () {
-                var self = $(this);
+            $(document).on("click", ".post .content .description", function () {
+                var self = $(this).closest(".post");
                 if(self.hasClass("active")) {
-                    return false
+                    self.removeClass("active");
+                    return false;
                 }
                 $.each($(".active"), function () {
                     $(this).removeClass("active");
@@ -207,7 +208,7 @@ var Post = (function(){
                 var input = $(this).closest(".number-input-group").find(".number-input");
                 var inputValue = input.val();
                 inputValue = parseInt(inputValue);
-                if(inputValue > 0) {
+                if(inputValue > 1) {
                     input.val(--inputValue);
                 }
             });
