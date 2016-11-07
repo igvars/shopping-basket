@@ -39,6 +39,9 @@ var scripts 	= [
         },{
             from: 'node_modules/bootstrap-sass/assets/fonts/bootstrap/*',
             to: 'dist/fonts/bootstrap'
+        },{
+            from: 'src/images/*',
+            to: 'dist/images'
         }
     ],
 

@@ -134,8 +134,8 @@ var Post = (function(){
                     focusOnSelect: true,
                     arrows: true,
                     variableWidth: true,
-                    prevArrow: "<div class='button-prev'><img src='src/images/arrow-left.png' alt=''></div>",
-                    nextArrow: "<div class='button-next'><img src='src/images/arrow-right.png' alt=''></div>",
+                    prevArrow: "<div class='button-prev'><img src='dist/images/arrow-left.png' alt=''></div>",
+                    nextArrow: "<div class='button-next'><img src='dist/images/arrow-right.png' alt=''></div>",
                     asNavFor: sliderId
                 });
 
