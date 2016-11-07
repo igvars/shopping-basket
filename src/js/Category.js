@@ -9,6 +9,9 @@ var Category = (function(){
         init: function(){
             this.getData(url);
         },
+        /**
+         * Get categories from remote json
+         */
         getData: function(url){
             $.ajax({
                 url: url,
@@ -20,6 +23,9 @@ var Category = (function(){
             });
             this.render();
         },
+        /**
+         * Render category list
+         */
         render: function(){
 
             var template = Handlebars.compile( $(templateElement).html() );
@@ -27,6 +33,9 @@ var Category = (function(){
 
             this.event();
         },
+        /**
+         * Create module events
+         */
         event: function(){
 
             $('.category-list a').click(function(e){

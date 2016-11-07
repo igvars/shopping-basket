@@ -26,6 +26,11 @@ var Post = (function(){
             });
             this.event();
         },
+        /**
+         * Generate data from remote products and galleries json
+         * @param category_id
+         * @param order
+         */
         getData: function(category_id, order){
             $.ajax({
                 url: "data/products.json",
@@ -81,6 +86,11 @@ var Post = (function(){
 
             this.render(products);
         },
+        /**
+         * Get post information
+         * @param post_id
+         * @returns {boolean}
+         */
         getPostForBasket: function (post_id) {
             var posts = "";
             $.ajax({
@@ -102,6 +112,10 @@ var Post = (function(){
             }
             return post;
         },
+        /**
+         * Render products
+         * @param data
+         */
         render: function(data){
 
             var template = Handlebars.compile( $(templateElement).html() );
@@ -142,6 +156,11 @@ var Post = (function(){
             });
 
         },
+        /**
+         * Increase max quantity when user remove product from basket
+         * @param post_id
+         * @param count
+         */
         increaseMaxQuantity: function (post_id, count) {
             var i = this.checkList(post_id);
             if(i) {
@@ -150,6 +169,11 @@ var Post = (function(){
                 this.render(products);
             }
         },
+        /**
+         * Reduce max quantity when user pick up product to basket
+         * @param post_id
+         * @param count
+         */
         reduceMaxQuantity: function (post_id, count) {
             var i = this.checkList(post_id);
             if(i) {
@@ -161,6 +185,11 @@ var Post = (function(){
                 this.render(products);
             }
         },
+        /**
+         * Get product index in data
+         * @param post_id
+         * @returns {*}
+         */
         checkList: function (post_id) {
             for(var i in products.products) {
                 if(products.products.hasOwnProperty(i)) {
@@ -171,6 +200,9 @@ var Post = (function(){
             }
             return false;
         },
+        /**
+         * Generate module events
+         */
         event: function(){
 
             $(document).on("click", ".post .content .description", function () {

@@ -24,6 +24,11 @@ var Basket = (function(){
                 Basket.render(items);
             });
         },
+        /**
+         * Add the product to the basket
+         * @param post_id
+         * @param count
+         */
         add: function (post_id, count) {
             var post  = Post.getPostForBasket(post_id);
             if(post) {
@@ -53,17 +58,29 @@ var Basket = (function(){
                 this.commit();
             }
         },
+        /**
+         * Remove the product from basket
+         * @param index
+         */
         remove: function (index) {
             items.items.splice(index, 1);
 
             this.commit();
         },
+        /**
+         * Count price of the product in basket
+         * @param itemPrice
+         * @param itemCount
+         */
         countPrice: function (itemPrice, itemCount) {
             var price = new Decimal(itemPrice);
             var count = new Decimal(itemCount);
             var sum = price.mul(count);
             return sum.toNumber();
         },
+        /**
+         * Count basket total price
+         */
         countTotalPrice: function () {
             var sum = new Decimal(0);
             for(var i in items.items) {
@@ -74,6 +91,9 @@ var Basket = (function(){
             }
             items.totalPrice = sum;
         },
+        /**
+         * Count quantity of products in basket
+         */
         countTotalCount: function () {
             items.totalCount = items.items.length;
         },
@@ -93,6 +113,11 @@ var Basket = (function(){
             }
             this.render(items);
         },
+        /**
+         * Check if product exist in basket
+         * @param post_id
+         * @returns {*}
+         */
         checkList: function (post_id) {
             for(var i in items.items) {
                 if(items.items.hasOwnProperty(i)) {
@@ -103,6 +128,10 @@ var Basket = (function(){
             }
             return false;
         },
+        /**
+         * Restore basket
+         * Review products if needed
+         */
         getData: function(){
             var rawItems = getCookie("shoppingBasket");
             if(rawItems) {
@@ -115,16 +144,27 @@ var Basket = (function(){
                 }
             }
         },
+        /**
+         * Render basket
+         * @param data
+         */
         render: function(data){
             var template = Handlebars.compile( $(templateElement).html() );
             $(containerElement + " div").remove();
             $(containerElement).append( template(data) );
         },
+        /**
+         * Save basket, recalculate total price and quantity
+         */
         commit: function () {
             this.countTotalCount();
             this.countTotalPrice();
             setCookie("shoppingBasket",JSON.stringify(items.items));
         },
+        /**
+         * Fetch basket data for Post module
+         * @returns {Array}
+         */
         fetchBasketData: function () {
             var result = [];
             for(var i in items.items) {
@@ -137,6 +177,9 @@ var Basket = (function(){
             }
             return result;
         },
+        /**
+         * Create module events
+         */
         event: function(){
             $(document).on("click", ".basket .arrow-down", function () {
                 var id = $(this).closest("li").data('item-id');
