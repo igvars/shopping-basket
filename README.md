@@ -58,6 +58,38 @@ images/some_gallery_id/2.png
 etc...
 ```
 
+Instructions
+-------------------
+For deploy project please follow next steps:
+- From project root run
+
+```
+npm install
+npm update
+gulp
+```
+- Open in your browser
+```
+index.html
+```
+- Source files located in
+```
+/src/js - all modules
+/src/scss - all scss files
+/src/images - all images
+```
+- Compiled files located in
+```
+/dist/js - js
+/dist/css - styles
+/dist/images - images
+/dist/fonts - fonts
+```
+- 3rd party libraries located in
+```
+/node_modules
+```
+
 Task description
 -------------------
 This task is about creating simple single page application with shopping basket functionality which consists of few products from different categories.
