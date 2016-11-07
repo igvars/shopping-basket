@@ -1,3 +1,5 @@
+@import "variables";
+
 article {
   margin-top: 75px;
 }
@@ -5,4 +7,23 @@ article {
   margin-left: 10px;
   font-size: 12px;
   width: 100px;
+}
+
+.list-label {
+  font-size: $default-font-size;
+}
+.category-list {
+  font-size: $default-font-size;
+  display: inline-block;
+  margin-bottom: 20px;
+
+  & > li {
+    display: inline-block;
+    vertical-align: top;
+    padding: 0 5px;
+
+    & > a {
+      color: $list-green;
+    }
+  }
 }
